@@ -1,4 +1,3 @@
-
 const maxNumberOfChoices = 5
 
 const availableChoices = new Map();
@@ -10,26 +9,21 @@ availableChoices.set("kindergarten", "Детский сад");
 
 const unavailbaleChoices = new Map();
 
-function toggleAddElemBtn(){
-    $("#addElemBtn").toggleClass('d-none');
-}
-
-function drawChoiceButtons(){
+function drawChoiceButtons() {
     let listChoicesButtons = document.getElementById("listVariantsToAdd");
     availableChoices.forEach(function (name, value) {
         let button = document.createElement("button")
         button.type = "button"
         button.value = value
         button.textContent = name
-        button.setAttribute( "onClick", "javascript: addElementToList(this.value);" );
-        button.setAttribute( "class", "list-group-item list-group-item-action choiceButton");
-        console.log(button)
+        button.setAttribute("onClick", "javascript: addElementToList(this.value);");
+        button.setAttribute("class", "list-group-item list-group-item-action choiceButton");
         listChoicesButtons.appendChild(button)
     })
     $("#addElemBtn").toggleClass('d-none');
 }
 
-function removeChoiceButtons(){
+function removeChoiceButtons() {
     const buttons = document.querySelectorAll('.choiceButton');
     buttons.forEach(button => {
         button.remove();
@@ -56,10 +50,10 @@ function getHeaderElement(elementName) {
 }
 
 
-function addElementToList(choice){
+function addElementToList(choice) {
 
     let blockElement = document.createElement("div");
-
+    blockElement.classList.add('choice');
     let header = getHeaderElement(choice)
     let selectTransportType = getCopyElement("selectTransportType");
     let selectTravelTime = getCopyElement("selectTravelTime");
@@ -103,7 +97,39 @@ function makeChoiceAvailable(choiceName) {
 
 }
 
-function removeListElement(removeButton){
+function removeListElement(removeButton) {
     makeChoiceAvailable(removeButton.value)
     removeButton.parentElement.parentElement.remove()
+}
+
+
+function sendSelectedChoices() {
+    const choicesElements = document.querySelectorAll('.choice');
+    let choices = []
+    choicesElements.forEach(choice => {
+        let choiceMap = {
+            choiceName: choice.getElementsByClassName("removeChoiceButton")[0].value,
+            transport: choice.getElementsByClassName("selectTransportType")[0].value,
+            travelTime: choice.getElementsByClassName("selectTravelTimeSelect")[0].value
+        }
+        choices.push(choiceMap)
+    });
+    let data = {
+        choices: choices,
+        email: document.getElementById("defaultForm-email1").value
+    }
+    makeAjaxWithChoices(data)
+}
+
+function makeAjaxWithChoices(data) {
+    $.ajax({
+        type: 'post',
+        url: '/api/v1/map',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        traditional: true,
+        success: function (data) {
+            console.log("SEND SUCCESS")
+        }
+    });
 }
