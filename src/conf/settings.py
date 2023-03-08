@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from envparse import env
+
+env.read_envfile()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.user',
+    'apps.maps',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +80,12 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DB_NAME', default=''),
+        'USER': env('POSTGRES_DB_USER', default=''),
+        'PASSWORD': env('POSTGRES_DB_PASSWORD', default=''),
+        'HOST': env('POSTGRES_DB_HOST', default=''),
+        'PORT': env('POSTGRES_DB_PORT', default='')
     }
 }
 
