@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    build: ./src
+    image: realtor_maps
+    command: gunicorn conf.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./src/:/app/
+      - ./src/static:/app/static
+    expose:
+      - 8000
+    env_file:
+      - ./src/conf/.env
+    depends_on:
+      - migration
+      - db
+
+  migration:
+    image: realtor_maps
+    command: python manage.py migrate --noinput
+    volumes:
+      - ./src/:/app/
+    depends_on:
+      - db
+
+  load_static:
+    image: realtor_maps
+    command: python manage.py collectstatic --noinput
+    volumes:
+      - ./src/:/app/
+    depends_on:
+      - app
+
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=owner
+      - POSTGRES_PASSWORD=owner
+      - POSTGRES_DB=realtor
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    volumes:
+      - ./src/static:/app/static
+    depends_on:
+      - app
+
+volumes:
+  postgres_data:
