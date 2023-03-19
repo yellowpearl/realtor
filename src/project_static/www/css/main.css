@@ -6,3 +6,7 @@ body {
     background-position: center center;
     background-attachment: fixed;
 }
+
+.error-validation-text {
+    color: #dc3545;
+}

@@ -21,6 +21,7 @@ function drawChoiceButtons() {
         listChoicesButtons.appendChild(button)
     })
     $("#addElemBtn").toggleClass('d-none');
+    deactivateValidationErrorAppearance();
 }
 
 function removeChoiceButtons() {
@@ -68,6 +69,7 @@ function addElementToList(choice) {
     formElementsList.appendChild(blockElement);
     removeChoiceButtons()
     makeChoiceUnavailable(choice)
+    deactivateValidationErrorAppearance()
 }
 
 function makeChoiceUnavailable(choiceName) {
@@ -132,4 +134,27 @@ function makeAjaxWithChoices(data) {
             console.log("SEND SUCCESS")
         }
     });
+}
+
+function validateForm() {
+    if(formIsValid()){
+        deactivateValidationErrorAppearance()
+        $('#triggerModal').click();
+    } else {
+        activateValidationErrorAppearance()
+    }
+}
+
+function formIsValid() {
+    return unavailbaleChoices.size !== 0
+}
+
+function activateValidationErrorAppearance() {
+    $("#addElemBtn").removeClass('btn-outline-dark').addClass('btn-outline-danger');
+    $("#errValidationText").removeClass('d-none');
+}
+
+function deactivateValidationErrorAppearance() {
+    $("#addElemBtn").addClass('btn-outline-dark').removeClass('btn-outline-danger');
+    $("#errValidationText").addClass('d-none');
 }

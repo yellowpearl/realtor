@@ -30,6 +30,7 @@ SECRET_KEY = 'django-insecure-$j93$gj$&d6d0@&w^ee+h7@tp=3njo!qe*)snxr%&3pb_+4+@q
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+environ = env('environ', default='local')
 
 ALLOWED_HOSTS = []
 
@@ -88,7 +89,7 @@ DATABASES = {
         'NAME': env('POSTGRES_DB_NAME', default=''),
         'USER': env('POSTGRES_DB_USER', default=''),
         'PASSWORD': env('POSTGRES_DB_PASSWORD', default=''),
-        'HOST': env('POSTGRES_DB_HOST', default=''),
+        'HOST': env('POSTGRES_DB_HOST', default='') if environ != "local" else "localhost",
         'PORT': env('POSTGRES_DB_PORT', default='')
     }
 }
