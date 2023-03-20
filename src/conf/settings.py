@@ -18,7 +18,7 @@ env.read_envfile()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["helprealtor.ru", "localhost", "127.0.0.1"]
 
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:1337']
 
@@ -31,8 +31,6 @@ SECRET_KEY = 'django-insecure-$j93$gj$&d6d0@&w^ee+h7@tp=3njo!qe*)snxr%&3pb_+4+@q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 environ = env('environ', default='local')
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
