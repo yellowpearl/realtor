@@ -123,7 +123,6 @@ function sendSelectedChoices() {
         email: document.getElementById("defaultForm-email1").value
     }
     makeAjaxWithChoices(data)
-    window.location.replace("success_send_choices.html");
 }
 
 function makeAjaxWithChoices(data) {
@@ -135,6 +134,7 @@ function makeAjaxWithChoices(data) {
         traditional: true,
         success: function (data) {
             console.log("SEND SUCCESS")
+            window.location.replace("success_send_choices.html");
         }
     });
 }
