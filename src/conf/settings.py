@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': env('POSTGRES_DB_NAME', default=''),
         'USER': env('POSTGRES_DB_USER', default=''),
         'PASSWORD': env('POSTGRES_DB_PASSWORD', default=''),
-        'HOST': env('POSTGRES_DB_HOST', default='') if environ != "local" else "localhost",
+        'HOST': env('POSTGRES_DB_HOST', default=''),
         'PORT': env('POSTGRES_DB_PORT', default='')
     }
 }
