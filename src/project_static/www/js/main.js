@@ -21,7 +21,6 @@ function drawChoiceButtons() {
         listChoicesButtons.appendChild(button)
     })
     $("#addElemBtn").toggleClass('d-none');
-    deactivateValidationErrorAppearance();
 }
 
 function removeChoiceButtons() {
@@ -69,7 +68,7 @@ function addElementToList(choice) {
     formElementsList.appendChild(blockElement);
     removeChoiceButtons()
     makeChoiceUnavailable(choice)
-    deactivateValidationErrorAppearance()
+    activateOpenModalButton()
 }
 
 function makeChoiceUnavailable(choiceName) {
@@ -102,6 +101,9 @@ function makeChoiceAvailable(choiceName) {
 function removeListElement(removeButton) {
     makeChoiceAvailable(removeButton.value)
     removeButton.parentElement.parentElement.remove()
+    if (unavailbaleChoices.size === 0) {
+        deactivateOpenModalButton()
+    }
 }
 
 
@@ -121,6 +123,7 @@ function sendSelectedChoices() {
         email: document.getElementById("defaultForm-email1").value
     }
     makeAjaxWithChoices(data)
+    window.location.replace("success_send_choices.html");
 }
 
 function makeAjaxWithChoices(data) {
@@ -136,25 +139,26 @@ function makeAjaxWithChoices(data) {
     });
 }
 
-function validateForm() {
-    if(formIsValid()){
-        deactivateValidationErrorAppearance()
-        $('#triggerModal').click();
+function activateOpenModalButton() {
+    document.getElementById("openModalButton").disabled = false;
+}
+
+function deactivateOpenModalButton() {
+    document.getElementById("openModalButton").disabled = true;
+}
+
+
+function validateEmail() {
+    let email = document.getElementById("defaultForm-email1").value
+    if (emailIsValid(email)) {
+        $('#sendSelectedChoiceBtn').click();
     } else {
-        activateValidationErrorAppearance()
+        $('#defaultForm-email1').addClass('is-invalid')
+        $('#invalidEmailDesc').removeClass('d-none')
     }
 }
 
-function formIsValid() {
-    return unavailbaleChoices.size !== 0
-}
-
-function activateValidationErrorAppearance() {
-    $("#addElemBtn").removeClass('btn-outline-dark').addClass('btn-outline-danger');
-    $("#errValidationText").removeClass('d-none');
-}
-
-function deactivateValidationErrorAppearance() {
-    $("#addElemBtn").addClass('btn-outline-dark').removeClass('btn-outline-danger');
-    $("#errValidationText").addClass('d-none');
+function emailIsValid(email) {
+  let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(email);
 }
