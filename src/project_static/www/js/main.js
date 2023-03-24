@@ -1,15 +1,21 @@
 const maxNumberOfChoices = 5
 
 const availableChoices = new Map();
+availableChoices.set("moscow_centre", "Центр города");
 availableChoices.set("subway", "Метро");
-availableChoices.set("grocery", "Продуктовый магазин");
+availableChoices.set("electric_train_stop", "Станция электрички");
 availableChoices.set("polyclinic", "Поликлиника");
 availableChoices.set("fitness", "Фитнес зал");
+availableChoices.set("sport_playground", "Спортивная площадка");
+availableChoices.set("pet_playground", "Площадка для животных");
 availableChoices.set("school", "Школа");
 availableChoices.set("kindergarten", "Детский сад");
-availableChoices.set("moscow_centre", "Центр города");
-availableChoices.set("mall", "Торговый центр");
+availableChoices.set("grocery", "Продуктовый магазин");
 availableChoices.set("bar", "Бар");
+availableChoices.set("cafe", "Кафе");
+availableChoices.set("fastfood", "Фастфуд");
+availableChoices.set("bar", "Бар");
+availableChoices.set("mall", "Торговый центр");
 
 
 const unavailbaleChoices = new Map();
