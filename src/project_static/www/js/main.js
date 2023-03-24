@@ -14,7 +14,6 @@ availableChoices.set("grocery", "Продуктовый магазин");
 availableChoices.set("bar", "Бар");
 availableChoices.set("cafe", "Кафе");
 availableChoices.set("fastfood", "Фастфуд");
-availableChoices.set("bar", "Бар");
 availableChoices.set("mall", "Торговый центр");
 
 
