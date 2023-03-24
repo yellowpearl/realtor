@@ -10,3 +10,4 @@ class MapDto(BaseModel):
     unique_id: uuid.UUID
     email: str
     choices: List[ChoiceDto]
+    is_paid: bool

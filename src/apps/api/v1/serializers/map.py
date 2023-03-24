@@ -12,6 +12,7 @@ class ChoiceSerializer(serializers.Serializer):
 class CreateRequestMapSerializer(serializers.Serializer):
     choices = ChoiceSerializer(many=True)
     email = serializers.EmailField()
+    is_paid = serializers.BooleanField()
 
     def create(self, validated_data):
         return MapService().create_from_data(validated_data)

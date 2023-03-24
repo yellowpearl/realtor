@@ -14,5 +14,6 @@ class MapFactory:
         return self.dto(
             unique_id=item.unique_id,
             email=item.user.email,
-            choices=[self.choice_factory.dto_from_model(choice) for choice in item.choices.all()]
+            choices=[self.choice_factory.dto_from_model(choice) for choice in item.choices.all()],
+            is_paid=item.is_paid
         )

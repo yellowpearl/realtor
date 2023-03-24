@@ -23,5 +23,6 @@ class RequestMapFactory:
     def dto_from_dict(self, data: dict) -> RequestMapDto:
         return self.dto(
             choices=[self.request_choice_factory.dto_from_dict(choice) for choice in data["choices"]],
-            email=data["email"]
+            email=data["email"],
+            is_paid=data["is_paid"]
         )

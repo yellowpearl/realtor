@@ -14,6 +14,7 @@ class Map(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="maps"
     )
+    is_paid = models.BooleanField(default=False, verbose_name="Оплачено?")
 
     class Meta:
         verbose_name = "Карта"

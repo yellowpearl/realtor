@@ -12,3 +12,4 @@ class RequestChoiceDto(BaseModel):
 class RequestMapDto(BaseModel):
     choices: List[RequestChoiceDto]
     email: str
+    is_paid: bool
