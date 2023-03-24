@@ -130,12 +130,12 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <h4 class="modal-title w-100 font-weight-bold">Введите вашу электронную почту</h4>
-                            <button type="button" class="btn-close m-3" data-dismiss="modal"
+                            <h4 class="modal-title w-100 font-weight-bold">Завершение</h4>
+                            <button type="button" class="btn-close m-1" data-dismiss="modal"
                                     aria-label="Close"></button>
                         </div>
                         <div class="modal-body mx-3">
-                            <div class="md-form mb-5">
+                            <div class="md-form mb-2">
                                 <i class="fas fa-envelope prefix grey-text">
                                     <label data-error="wrong" data-success="right" for="defaultForm-email1">
                                         Почта
@@ -146,17 +146,50 @@
                                 </div>
                             </div>
 
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <button type="button" value="buttonValue"
-                                    class="btn btn-success w-100 btn-rounded waves-effect waves-light"
-                                    onclick="validateEmail()">Получить карту
-                            </button>
-                            <!-- hidden submit button -->
-                            <button id="sendSelectedChoiceBtn" class="d-none" type="button"
-                                    onclick="sendSelectedChoices()"></button>
+
+                        <div class="card-deck mb-3 text-center">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4 class="my-0 font-weight-normal">Полностью</h4>
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-title pricing-card-title">₽199</h3>
+                                    <ul class="list-unstyled mt-3 mb-4">
+                                        <li>Все настройки карты</li>
+                                        <li>Приоритет в создании</li>
+                                        <li>Скидки в будущем</li>
+                                    </ul>
+                                    <button type="button" class="btn btn-lg btn-block btn-success"
+                                            onclick="validateEmail(true)">Получить
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4 class="my-0 font-weight-normal">Бесплатно</h4>
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-title pricing-card-title">₽0</h3>
+                                    <ul class="list-unstyled mt-3 mb-4">
+                                        <li>Только доступность до метро</li>
+                                    </ul>
+                                    <button type="button" class="btn btn-lg btn-block btn-outline-success"
+                                            onclick="validateEmail(false)">Получить
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- hidden submit buttons -->
+                            <button id="sendSelectedChoiceBtnIsPaid" class="d-none" type="button"
+                                    onclick="sendSelectedChoices(true)"></button>
+                            <button id="sendSelectedChoiceBtnIsNotPaid" class="d-none" type="button"
+                                    onclick="sendSelectedChoices(false)"></button>
 
                         </div>
+
+
+
+                        </div>
+
                     </div>
                 </div>
             </div>

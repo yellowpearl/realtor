@@ -107,7 +107,7 @@ function removeListElement(removeButton) {
 }
 
 
-function sendSelectedChoices() {
+function sendSelectedChoices(isPaid) {
     const choicesElements = document.querySelectorAll('.choice');
     let choices = []
     choicesElements.forEach(choice => {
@@ -120,7 +120,8 @@ function sendSelectedChoices() {
     });
     let data = {
         choices: choices,
-        email: document.getElementById("defaultForm-email1").value
+        email: document.getElementById("defaultForm-email1").value,
+        is_paid: isPaid
     }
     makeAjaxWithChoices(data)
 }
@@ -132,9 +133,16 @@ function makeAjaxWithChoices(data) {
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         traditional: true,
-        success: function (data) {
-            console.log("SEND SUCCESS")
-            window.location.replace("success_send_choices.html");
+        success: function (rData) {
+            if (data.is_paid) {
+                window.location.replace("success_send_choices_paid.html");
+            } else {
+                window.location.replace("success_send_choices.html");
+            }
+        },
+        error: function (jqXHR, exception) {
+            console.log("ERR")
+            //window.location.replace("error_send_choices.html");
         }
     });
 }
@@ -148,10 +156,14 @@ function deactivateOpenModalButton() {
 }
 
 
-function validateEmail() {
+function validateEmail(is_paid) {
     let email = document.getElementById("defaultForm-email1").value
     if (emailIsValid(email)) {
-        $('#sendSelectedChoiceBtn').click();
+        if (is_paid) {
+            $('#sendSelectedChoiceBtnIsPaid').click();
+        } else {
+            $('#sendSelectedChoiceBtnIsNotPaid').click();
+        }
     } else {
         $('#defaultForm-email1').addClass('is-invalid')
         $('#invalidEmailDesc').removeClass('d-none')
