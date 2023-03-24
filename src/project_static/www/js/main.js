@@ -2,10 +2,15 @@ const maxNumberOfChoices = 5
 
 const availableChoices = new Map();
 availableChoices.set("subway", "Метро");
+availableChoices.set("grocery", "Продуктовый магазин");
 availableChoices.set("polyclinic", "Поликлиника");
 availableChoices.set("fitness", "Фитнес зал");
 availableChoices.set("school", "Школа");
 availableChoices.set("kindergarten", "Детский сад");
+availableChoices.set("moscow_centre", "Центр города");
+availableChoices.set("mall", "Торговый центр");
+availableChoices.set("bar", "Бар");
+
 
 const unavailbaleChoices = new Map();
 
