@@ -153,7 +153,7 @@ function makeAjaxWithChoices(data) {
         },
         error: function (jqXHR, exception) {
             console.log("ERR")
-            //window.location.replace("error_send_choices.html");
+            window.location.replace("error_send_choices.html");
         }
     });
 }
